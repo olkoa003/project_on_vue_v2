@@ -1,4 +1,4 @@
-# calculator5
+## Calculator || Personal Costs app
 
 ## Project setup
 ```
