@@ -1,6 +1,6 @@
 <template>
   <div class="paymentsList">
-    <sorted-table :items="paymentsList">
+    <table>
       <thead>
         <tr>
           <th class="header">
@@ -17,17 +17,15 @@
           </th>
         </tr>
       </thead>
-      <template>
-        <tbody>
-          <tr v-for="(item, index) in paymentsList" :key="index">
-            <td>{{ index }}</td>
-            <td>{{ item.date }}</td>
-            <td>{{ item.category }}</td>
-            <td>{{ item.value }}</td>
-          </tr>
-        </tbody>
-      </template>
-    </sorted-table>
+      <tbody>
+        <tr v-for="(item, index) in items" :key="index">
+          <td>{{ index }}</td>
+          <td>{{ item.date }}</td>
+          <td>{{ item.category }}</td>
+          <td>{{ item.value }}</td>
+        </tr>
+      </tbody>
+    </table>
   </div>
 </template>
 
@@ -43,7 +41,25 @@ export default {
 };
 </script>
 
-
 <style scoped lang="scss">
+table {
+  font-family: arial, sans-serif;
+  border-collapse: collapse;
+  width: 650px;
+  margin-left: 20px;
+}
 
+td,
+th {
+  border: 1px solid #dddddd;
+  text-align: left;
+  padding: 8px;
+}
+
+.title {
+  display: flex;
+  justify-content: start;
+  font-weight: bold;
+  margin-left: 20px;
+}
 </style>

@@ -1,15 +1,24 @@
 <template>
-  <div class="form-wrapper">
-    <input class="input-form" v-model="date" placeholder="Payment Date" />
-    <input class="input-form" v-model="category" placeholder="Payment Category"/>
-    <input class="input-form" v-model="value" placeholder="Payment amount" />
-    <div class="addNewCostButton">
-      <button type="button" class="form-button" @click="onClickSave">
-        Add New Cost +
-      </button>
-    </div>
+  <div class="main-form form-wrapper">
+    <input type="date" class="payment-form" v-model="date"/>
+    <select
+      class="payment-form"
+      id="category"
+      v-model="category"
+      name="category"
+      placeholder="Category"
+    >
+      <option disabled selected value="">Please select category</option>
+      <option value="Food">Food</option>
+      <option value="Transport">Transport</option>
+      <option value="Clothes">Clothes</option>
+    </select>
+    <input class="payment-form" v-model="value" placeholder="Please select an amount" />
+    <button class="save-button" @click="onClickSave">ADD +</button>
   </div>
 </template>
+
+
 <script>
 export default {
   name: "AddPaymentForm",
@@ -18,6 +27,7 @@ export default {
       date: "",
       category: "",
       value: "",
+      titleBtn: 'ADD'
     };
   },
   computed: {
@@ -44,29 +54,27 @@ export default {
 </script>
 
 
-<style scoped lang="scss">
-.input-form {
-  padding: 10px;
-  width: 300px;
-  margin-bottom: 10px;
-  margin-top: 10px;
-}
 
-//button 
-.form-button {
-  padding: 10px;
-  font-size: 10px;
-  font-weight: bold;
-}
-
-.addNewCostButton{
-    background-color: green;
-    border-radius: 20px;
-}
-
-.form-wrapper {
-  display: inline-flex;
+<style lang="scss" scoped>
+.main-form {
+  display: flex;
   flex-direction: column;
-  align-items: center;
+  width: 300px;
+  margin-left: 20px;
+}
+
+.payment-form {
+  margin-top: 10px;
+  padding: 20px;
+}
+
+.save-button {
+  padding: 10px;
+  font-size: 20px;
+  background: green;
+  color: white;
+  border: none;
+  margin-top: 10px;
+  margin-bottom: 10px;
 }
 </style>
