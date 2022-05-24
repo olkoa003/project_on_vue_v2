@@ -1,32 +1,27 @@
 <template>
-    <button class="PaymentForm__btn" @click="clicked"> {{ title }} </button>
+  <button @click="clicked" >{{ title }}</button>
 </template>
-    
+
 <script>
-    export default {
-        name: "MyButton",
-        props:[
-            'title',
-        ],
-        data(){
-            return {
-                //
-            }
-        },
-        methods: {
-            clicked(){
-                this.$emit('onClickSave');
-            }
-        }
+export default {
+  name: "MyButton",
+  data() {
+    return {
+      title: 'SAVE COST'
+    };
+  },
+   methods: {
+    clicked(){
+        const data = {
+        date: this.date || this.getCurrentDate,
+        category: this.category,
+        value: this.value,
+      };
+    this.$emit('onClickSave')
     }
+  },
+};
 </script>
 
 <style scoped>
-
-.PaymentForm__btn{
-    margin: 15px 0;
-    width: 150px;
-    background-color: #7fecff;
-    align-self: end;
-}
 </style>

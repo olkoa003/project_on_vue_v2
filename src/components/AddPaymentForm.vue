@@ -1,20 +1,26 @@
 <template>
-  <div class="main-form form-wrapper">
-    <input type="date" class="payment-form" v-model="date"/>
-    <select
-      class="payment-form"
-      id="category"
-      v-model="category"
-      name="category"
-      placeholder="Category"
-    >
-      <option disabled selected value="">Please select category</option>
-      <option value="Food">Food</option>
-      <option value="Transport">Transport</option>
-      <option value="Clothes">Clothes</option>
-    </select>
-    <input class="payment-form" v-model="value" placeholder="Please select an amount" />
-    <button class="save-button" @click="onClickSave">ADD +</button>
+  <div>
+    <div class="main-form">
+      <input type="date" class="payment-form" v-model="date" />
+      <select
+        class="payment-form"
+        id="category"
+        v-model="category"
+        name="category"
+        placeholder="Category"
+      >
+        <option disabled selected value="">Please select category</option>
+        <option value="Food">Food</option>
+        <option value="Transport">Transport</option>
+        <option value="Clothes">Clothes</option>
+      </select>
+      <input
+        class="payment-form"
+        v-model.number="value"
+        placeholder="Please select an amount"
+      />
+      <button class="save-button" @click="onClickSave">ADD +</button>
+    </div>
   </div>
 </template>
 
@@ -26,8 +32,7 @@ export default {
     return {
       date: "",
       category: "",
-      value: "",
-      titleBtn: 'ADD'
+      value: 0
     };
   },
   computed: {
@@ -55,7 +60,7 @@ export default {
 
 
 
-<style lang="scss" scoped>
+<style>
 .main-form {
   display: flex;
   flex-direction: column;
@@ -76,5 +81,9 @@ export default {
   border: none;
   margin-top: 10px;
   margin-bottom: 10px;
+}
+
+.hidden {
+  display: none;
 }
 </style>

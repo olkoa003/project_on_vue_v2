@@ -4,7 +4,7 @@
       <thead>
         <tr>
           <th class="header">
-            <sort-link item="index">Id</sort-link>
+            <sort-link item="index">ID</sort-link>
           </th>
           <th class="header">
             <sort-link item="date">Date</sort-link>
@@ -30,18 +30,19 @@
 </template>
 
 <script>
+
 export default {
   name: "PaymentsDisplay",
   props: {
     items: {
       type: Array,
-      default: () => [],
+      default: () => []
     },
   },
 };
 </script>
 
-<style scoped lang="scss">
+<style scoped>
 table {
   font-family: arial, sans-serif;
   border-collapse: collapse;

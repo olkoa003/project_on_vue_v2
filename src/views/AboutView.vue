@@ -3,11 +3,16 @@
     <div>
       <h1 class="title">My Personal Costs</h1>
     </div>
-    <MyButton class="PaymentForm__btn" :title="titleBtn" @onClickSave="addNewCost" />
+    <div class="button-wrap">
+      <button class="save-button" type="button" @click="addNewCost">
+        ADD NEW COST +
+      </button>
+    </div>
     <AddPaymentForm @addNewPayment="addPaymentData" />
     <main>
       <PaymentsDisplay :items="paymentsList" />
     </main>
+     <MyButton @click="onClickSave"/>
   </div>
 </template>
 
@@ -15,6 +20,7 @@
 import PaymentsDisplay from "@/components/PaymentsDisplay.vue";
 import AddPaymentForm from "@/components/AddPaymentForm.vue";
 import MyButton from "@/components/MyButton.vue";
+
 
 export default {
   name: "HomeView",
@@ -25,15 +31,12 @@ export default {
   },
   data() {
     return {
-      paymentsList: [],
-      titleBtn: 'ADD NEW COST +',
-      disabled: false,
+      paymentsList: []
     };
   },
   methods: {
-    addNewCost(){
-      document.querySelector("PaymentForm__btn").classList.toggle('hidden');
-      console.log(this.$emit);
+    addNewCost() {
+      document.querySelector(".main-form").classList.toggle("hidden");
     },
     addPaymentData(data) {
       this.paymentsList.push(data);
@@ -41,17 +44,22 @@ export default {
     fetchData() {
       return [
         {
-          date: "28.3.2022",
+          date: "2022-05-20",
           category: "Food",
           value: 169,
         },
         {
-          date: "24.4.2022",
+          date: "2022-05-20",
           category: "Transport",
           value: 360,
         },
         {
-          date: "24.3.2022",
+          date: "2022-05-20",
+          category: "Clothes",
+          value: 532,
+        },
+        {
+          date: "2022-05-20",
           category: "Clothes",
           value: 532,
         },
@@ -65,7 +73,7 @@ export default {
 };
 </script>
 
-<style lang="scss" scoped>
+<style>
 .title {
   font-size: 40px;
   display: flex;
@@ -73,7 +81,13 @@ export default {
   margin-left: 20px;
 }
 
-.hidden{
+.hidden {
   display: none;
+}
+
+.button-wrap{
+  display: flex;
+  justify-content: start;
+  margin-left: 20px;
 }
 </style>
