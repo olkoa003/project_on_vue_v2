@@ -1,5 +1,5 @@
 <template>
-  <button @click="clicked" >{{ title }}</button>
+  <button @click="clicked">{{ title }}</button>
 </template>
 
 <script>
@@ -10,15 +10,10 @@ export default {
       title: 'SAVE COST'
     };
   },
-   methods: {
-    clicked(){
-        const data = {
-        date: this.date || this.getCurrentDate,
-        category: this.category,
-        value: this.value,
-      };
-    this.$emit('onClickSave')
-    }
+  methods: {
+    clicked() {
+      this.$emit("onClickSave");
+    },
   },
 };
 </script>
