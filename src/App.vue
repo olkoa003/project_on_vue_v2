@@ -4,9 +4,13 @@
       <router-link to="/">Calculator</router-link> |
       <router-link to="/about">My Personal Costs Page</router-link>
     </nav>
-    <router-view/>
+    <router-view />
   </div>
 </template>
+
+<script>
+</script>
+
 
 <style lang="scss">
 #app {
@@ -23,12 +27,11 @@ nav {
   a {
     font-weight: bold;
     color: #2c3e50;
-    text-decoration: none;  
+    text-decoration: none;
 
     &.router-link-exact-active {
       color: #42b983;
     }
-
   }
 }
 </style>
