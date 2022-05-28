@@ -1,42 +1,41 @@
 <template>
-  <div class="paymentsList">
-    <table>
-      <thead>
-        <tr>
-          <th class="header">
-            <sort-link item="index">ID</sort-link>
-          </th>
-          <th class="header">
-            <sort-link item="date">Date</sort-link>
-          </th>
-          <th class="header">
-            <sort-link item="category">Category</sort-link>
-          </th>
-          <th class="header">
-            <sort-link item="value">Value</sort-link>
-          </th>
-        </tr>
-      </thead>
-      <tbody>
-        <tr v-for="(item, index) in items" :key="index">
-          <td>{{ index }}</td>
-          <td>{{ item.date }}</td>
-          <td>{{ item.category }}</td>
-          <td>{{ item.value }}</td>
-        </tr>
-      </tbody>
-    </table>
+  <div>
+    <h2 class="under_title">Total Amount Spent: {{ getFPV }}</h2>
+    <div class="paymentsList">
+      <table>
+        <thead>
+          <tr>
+            <th class="header" item="index">ID</th>
+            <th class="header" item="index">Date</th>
+            <th class="header" item="index">Category</th>
+            <th class="header" item="index">Value</th>
+          </tr>
+        </thead>
+        <tbody>
+          <tr v-for="(item, index) in items" :key="index">
+            <td>{{ index }}</td>
+            <td>{{ item.date }}</td>
+            <td>{{ item.category }}</td>
+            <td>{{ item.value }}</td>
+          </tr>
+        </tbody>
+      </table>
+    </div>
   </div>
 </template>
 
 <script>
-
 export default {
   name: "PaymentsDisplay",
   props: {
     items: {
       type: Array,
-      default: () => []
+      default: () => [],
+    },
+  },
+  computed:{
+    getFPV() {
+      return this.$store.getters.getFullPaymentValue;
     },
   },
 };

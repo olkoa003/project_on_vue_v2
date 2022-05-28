@@ -1,5 +1,7 @@
 <template>
-  <button @click="clicked">{{ title }}</button>
+    <div>
+        
+    </div>
 </template>
 
 <script>

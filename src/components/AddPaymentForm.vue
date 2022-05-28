@@ -2,17 +2,10 @@
   <div>
     <div class="main-form">
       <input type="date" class="payment-form" v-model="date" />
-      <select
-        class="payment-form"
-        id="category"
-        v-model="category"
-        name="category"
-        placeholder="Category"
-      >
-        <option disabled selected value="">Please select category</option>
-        <option value="Food">Food</option>
-        <option value="Transport">Transport</option>
-        <option value="Clothes">Clothes</option>
+      <select class="payment-form" v-model="category" v-if="categoryList">
+        <option v-for="(value, idx) in categoryList" :key="idx">
+          {{ value }}
+        </option>
       </select>
       <input
         class="payment-form"
@@ -32,7 +25,7 @@ export default {
     return {
       date: "",
       category: "",
-      value: 0
+      value: 0,
     };
   },
   computed: {
@@ -43,6 +36,9 @@ export default {
       const y = today.getFullYear();
       return `${d}.${m}.${y}`;
     },
+    categoryList() {
+      return this.$store.getters.getCategoryList;
+    },
   },
   methods: {
     onClickSave() {
@@ -51,10 +47,13 @@ export default {
         category: this.category,
         value: this.value,
       };
-      this.$emit("addNewPayment", data);
-      console.log(data);
+      this.$store.commit("addDataToPaymentsList", data);
     },
   },
+  async created() {
+    await this.$store.dispatch("fetchCategoryList");
+  },
+  mounted() {},
 };
 </script>
 
