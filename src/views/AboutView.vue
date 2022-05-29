@@ -36,6 +36,7 @@ export default {
     AddPaymentForm,
     MyButton,
     MyPagination,
+
   },
   data() {
     return {
@@ -45,13 +46,10 @@ export default {
     };
   },
   computed: {
-    ...mapGetters(["getFullPaymentValue", "getPaymentsList"]),
-    currentElements() {
-      return this.getPaymentsList.slice(
-        this.n * (this.cur - 1),
-        this.n * (this.cur - 1) + this.n
-      );
-    },
+    ...mapGetters(['getFullPaymentValue', 'getPaymentsList']),
+    currentElements(){
+      return this.getPaymentsList.slice(this.n * (this.cur - 1), this.n * (this.cur -1) + this.n)
+    }
   },
   methods: {
     ...mapMutations({
@@ -72,7 +70,10 @@ export default {
     this.$store.dispatch("fetchData");
     // this.$store.commit('setPaymentsListData', this.fetchData())
   },
-  mounted() {},
+  mounted() {
+    if(!this.$route.params?.page || isNaN(this.$route.params.page)) return
+    this.cur = Number(this.$route.params.page)
+  }
 };
 </script>
 

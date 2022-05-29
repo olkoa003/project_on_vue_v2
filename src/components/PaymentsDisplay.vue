@@ -13,7 +13,7 @@
         </thead>
         <tbody>
           <tr v-for="(item, index) in items" :key="index">
-            <td>{{ index }}</td>
+            <td>{{ item.id }}</td>
             <td>{{ item.date }}</td>
             <td>{{ item.category }}</td>
             <td>{{ item.value }}</td>
@@ -33,7 +33,7 @@ export default {
       default: () => [],
     },
   },
-  computed:{
+  computed: {
     getFPV() {
       return this.$store.getters.getFullPaymentValue;
     },

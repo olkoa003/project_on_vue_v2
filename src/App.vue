@@ -9,6 +9,15 @@
 </template>
 
 <script>
+export default {
+  methods: {
+    goToAboutPage() {
+      this.$router.push({
+        name: "About",
+      })
+    }
+  },
+}
 </script>
 
 

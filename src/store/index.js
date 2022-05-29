@@ -4,6 +4,7 @@ import Vuex from 'vuex'
 Vue.use(Vuex)
 
 const mutations = {
+
   setPaymentsListData(state, payload) {
     state.paymentList = payload
   },
@@ -13,10 +14,6 @@ const mutations = {
   setCategories(state, payload){
     state.categoryList = payload
   }
-  // ediPaymentsListFirstElement (state, payload) {
-  //   Vue.set(state.paymentList, 0, payload)
-  //   state.paymentsList = [...state.paymentsList]
-  // }
 }
 
 const getters = {

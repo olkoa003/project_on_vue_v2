@@ -26,6 +26,7 @@ export default {
       date: "",
       category: "",
       value: 0,
+      id: Number,
     };
   },
   computed: {
@@ -53,7 +54,24 @@ export default {
   async created() {
     await this.$store.dispatch("fetchCategoryList");
   },
-  mounted() {},
+  mounted() {
+    if (this.$route.params.category) {
+      this.category = this.$route.params.category;
+    }
+    if (this.$route.query.value) {
+      this.value = Number(this.$route.query.value);
+    }
+    if (this.value && this.category) {
+      this.date = this.getCurrentDate;
+      const data = {
+        category: this.category,
+        date: this.date,
+        id: Date.now(),
+        value: this.value,
+      };
+      this.$store.commit("addDataToPaymentsList", data);
+    }
+  },
 };
 </script>
 
