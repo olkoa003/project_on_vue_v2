@@ -2,22 +2,16 @@
   <div id="app">
     <nav>
       <router-link to="/">Calculator</router-link> |
-      <router-link to="/about">My Personal Costs Page</router-link>
+      <router-link to="/about">My Personal Costs Page</router-link> | 
+      <router-link :to="{ name: 'AddPaymentForm', params: { section: 'payment', category: 'Food' }, query: {value: 200}}">Food Expense 1</router-link> | 
+      <router-link :to="{ name: 'AddPaymentForm', params: { section: 'payment', category: 'Transport' }, query: {value: 50}}">Transport Expense 2</router-link> | 
+      <router-link :to="{ name: 'AddPaymentForm', params: { section: 'payment', category: 'Entertainment' }, query: {value: 2000}}">Entertainment Expense 3</router-link> | 
     </nav>
     <router-view />
   </div>
 </template>
 
 <script>
-export default {
-  methods: {
-    goToAboutPage() {
-      this.$router.push({
-        name: "About",
-      })
-    }
-  },
-}
 </script>
 
 

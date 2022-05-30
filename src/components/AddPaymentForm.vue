@@ -55,18 +55,24 @@ export default {
     await this.$store.dispatch("fetchCategoryList");
   },
   mounted() {
-    if (this.$route.params.category) {
-      this.category = this.$route.params.category;
+    const { category, section } = this.$route.params;
+    if (!category || !section) {
+      return;
     }
-    if (this.$route.query.value) {
-      this.value = Number(this.$route.query.value);
+    this.category = category;
+
+    const { value } = this.$route.query;
+    if (!value) {
+      return;
     }
+    this.value = value;
+
     if (this.value && this.category) {
       this.date = this.getCurrentDate;
       const data = {
+        id: Date.now(),
         category: this.category,
         date: this.date,
-        id: Date.now(),
         value: this.value,
       };
       this.$store.commit("addDataToPaymentsList", data);
@@ -74,7 +80,6 @@ export default {
   },
 };
 </script>
-
 
 
 <style>
