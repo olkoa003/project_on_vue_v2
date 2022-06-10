@@ -9,14 +9,16 @@
             <th class="header" item="index">Date</th>
             <th class="header" item="index">Category</th>
             <th class="header" item="index">Value</th>
+            <th class="header" item="index">Action</th>
           </tr>
         </thead>
         <tbody>
-          <tr v-for="(item, index) in items" :key="index">
+          <tr v-for="(item, id) in items" :key="id">
             <td>{{ item.id}}</td>
             <td>{{ item.date }}</td>
             <td>{{ item.category }}</td>
             <td>{{ item.value }}</td>
+            <td class="cursor" @click="onContextMenuClick">...</td>
           </tr>
         </tbody>
       </table>
@@ -38,10 +40,42 @@ export default {
       return this.$store.getters.getFullPaymentValue;
     },
   },
-};
+  methods: {
+    editItem(item) {
+      this.$modal.show('addform', {title: "Edit Payment Details", component: 'AddPaymentForm', props: {
+        item
+      }})
+      console.log('edit',item)
+    },
+    deleteItem(item){
+      console.log('deleteItem',item)
+      //mutation delete
+      this.$contextMenu.hide()
+    },
+    
+    onContextMenuClick(event, item){
+      const items = [
+          {
+            text: "Edit", action: ()=> { this.editItem(item)}
+          },
+          {
+            text: 'Delete Item',
+            action: ()=> {
+              this.$store.commit('deleteFromPaymentsList', item.id)
+            }
+          }
+        ]
+      this.$contextMenu.show({event,items})
+    }
+  }
+}
 </script>
 
 <style scoped>
+.cursor {
+  cursor: pointer;
+}
+
 table {
   font-family: arial, sans-serif;
   border-collapse: collapse;

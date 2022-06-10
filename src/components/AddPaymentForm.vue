@@ -10,8 +10,7 @@
       <input
         class="payment-form"
         v-model.number="value"
-        placeholder="Please select an amount"
-      />
+        placeholder="Please select an amount"/>
       <button class="save-button" @click="onClickSave">ADD +</button>
     </div>
   </div>
@@ -21,12 +20,15 @@
 <script>
 export default {
   name: "AddPaymentForm",
+  props:{
+    values: Object
+  },
   data() {
     return {
       date: "",
       category: "",
       value: 0,
-      id: Number,
+      id: Number
     };
   },
   computed: {
@@ -104,6 +106,7 @@ export default {
   margin-top: 10px;
   margin-bottom: 10px;
 }
+
 
 .hidden {
   display: none;
