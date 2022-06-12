@@ -66,7 +66,7 @@ export default {
       this.paymentsList.push(data);
     },
     openModalForm(){
-      this.$modal.show('addform', {title: "Add New Payment", component: 'AddPaymentForm'})
+      this.$modal.show('addform', {title: "Add New Payment", component: 'AddPaymentForm'});
     }
   },
   created() {
@@ -77,8 +77,8 @@ export default {
   mounted() {
     if (!this.$route.params?.page || isNaN(this.$route.params.page)) return;
     this.cur = Number(this.$route.params.page);
-  },
-};
+  }
+}
 </script>
 
 <style>
