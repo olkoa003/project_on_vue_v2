@@ -5,11 +5,11 @@
       <table>
         <thead>
           <tr>
-            <th class="header" item="index">ID</th>
-            <th class="header" item="index">Date</th>
-            <th class="header" item="index">Category</th>
-            <th class="header" item="index">Value</th>
-            <th class="header" item="index">Action</th>
+            <th class="header">ID</th>
+            <th class="header">Date</th>
+            <th class="header">Category</th>
+            <th class="header">Value</th>
+            <th class="header">Action</th>
           </tr>
         </thead>
         <tbody>
@@ -18,7 +18,7 @@
             <td>{{ item.date }}</td>
             <td>{{ item.category }}</td>
             <td>{{ item.value }}</td>
-            <td class="cursor" @click="onContextMenuClick">...</td>
+            <td class="cursor" @click="onContextMenuClick($event,item)">...</td>
           </tr>
         </tbody>
       </table>

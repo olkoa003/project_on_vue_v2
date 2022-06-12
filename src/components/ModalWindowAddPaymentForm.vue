@@ -2,20 +2,18 @@
   <div class="wrapper">
     <div class="header">{{ settings.title }}</div>
     <div class="content">
-      <component :is="AddPaymentForm" :item="settings.content"/>
+      <component :is="settings.component" :values="settings.props"/>
      </div>
     <div class="footer">
-      <button class="save-button" @click="onCloseClick">Close</button>
+      <button @click="onCloseClick">Close</button>
     </div>
   </div>
 </template>
-
 <script>
 export default{
     name: "ModalWindowAddPaymentForm",
     props: {
-      settings: Object,
-      id: Number
+      settings: Object
     },
     components: {
         AddPaymentForm: ()=>import('./AddPaymentForm.vue'),
@@ -28,22 +26,12 @@ export default{
     },
 }
 </script>
-
 <style lang="scss" scoped >
 .wrapper{
+    padding: 20px;
     position: absolute;
-    top: 31%;
-    left: 45%;
+    top:20%;
+    left: 35%;
     background: #efefef;
-    padding-top: 30px;
-    padding-bottom: 20px;
-    padding-left: 20px;
-    padding-right: 35px;
-}
-
-.header{
-    font-size: 30px;
-    text-align: center;
-    color: black;
 }
 </style>
