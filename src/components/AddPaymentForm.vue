@@ -11,7 +11,7 @@
         class="payment-form"
         v-model.number="value"
         placeholder="Please select an amount"/>
-      <button class="save-button" @click="onClickSave">ADD +</button>
+      <button class="save-button" @click="onClickSave">SAVE</button>
     </div>
   </div>
 </template>
@@ -21,7 +21,7 @@
 export default {
   name: "AddPaymentForm",
   props:{
-    values: Object
+    item: Object
   },
   data() {
     return {
@@ -48,7 +48,7 @@ export default {
       const data = {
         date: this.date || this.getCurrentDate,
         category: this.category,
-        value: this.value,
+        value: this.valuee
       };
       this.$store.commit("addDataToPaymentsList", data);
     },
@@ -57,30 +57,27 @@ export default {
     await this.$store.dispatch("fetchCategoryList");
   },
   mounted() {
-    const { category, section } = this.$route.params;
-    if (!category || !section) {
-      return;
+    if(this.values?.item) {
+      
+      const {category, date, value} = this.values.item
+      this.value = value
+      this.date = date
+      this.category = category
+      return 
     }
-    this.category = category;
-
-    const { value } = this.$route.query;
-    if (!value) {
-      return;
+    const {category, section} = this.$route.params
+    if(!category || !section) {
+      return 
     }
-    this.value = value;
-
-    if (this.value && this.category) {
-      this.date = this.getCurrentDate;
-      const data = {
-        id: Date.now(),
-        category: this.category,
-        date: this.date,
-        value: this.value,
-      };
-      this.$store.commit("addDataToPaymentsList", data);
+    this.category = category
+    const {value} = this.$route.query
+    if(!value) return 
+    this.value = value
+    if(this.value && this.category) {
+       this.onClickSave()
     }
   },
-};
+}
 </script>
 
 
@@ -89,7 +86,7 @@ export default {
   display: flex;
   flex-direction: column;
   width: 300px;
-  margin-left: 20px;
+  margin-left: 10px;
 }
 
 .payment-form {
@@ -106,7 +103,6 @@ export default {
   margin-top: 10px;
   margin-bottom: 10px;
 }
-
 
 .hidden {
   display: none;

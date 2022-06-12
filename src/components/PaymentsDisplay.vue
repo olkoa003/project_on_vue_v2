@@ -13,8 +13,8 @@
           </tr>
         </thead>
         <tbody>
-          <tr v-for="(item, id) in items" :key="id">
-            <td>{{ item.id}}</td>
+          <tr v-for="(item, idx) in items" :key="idx">
+            <td>{{ item.id }} </td>
             <td>{{ item.date }}</td>
             <td>{{ item.category }}</td>
             <td>{{ item.value }}</td>
@@ -27,6 +27,8 @@
 </template>
 
 <script>
+import { mapMutations } from "vuex";
+
 export default {
   name: "PaymentsDisplay",
   props: {
@@ -41,28 +43,26 @@ export default {
     },
   },
   methods: {
+    ...mapMutations([
+      'deleteElementFromPaymentList',
+    ]),
     editItem(item) {
-      this.$modal.show('addform', {title: "Edit Payment Details", component: 'AddPaymentForm', props: {
-        item
-      }})
+      this.$modal.show('addform', {title: "Edit Payment", component: 'AddPaymentForm', props: {item} })
       console.log('edit',item)
     },
-    deleteItem(item){
-      console.log('deleteItem',item)
-      //mutation delete
-      this.$contextMenu.hide()
+
+    actionDelete(id) {
+      this.deleteElementFromPaymentList(id);
+      this.$contextMenu.close();
     },
-    
+
     onContextMenuClick(event, item){
       const items = [
           {
             text: "Edit", action: ()=> { this.editItem(item)}
           },
           {
-            text: 'Delete Item',
-            action: ()=> {
-              this.$store.commit('deleteFromPaymentsList', item.id)
-            }
+            text: 'Delete item', action: ()=>{ this.actionDelete(item.id)}
           }
         ]
       this.$contextMenu.show({event,items})

@@ -2,7 +2,7 @@
   <div class="wrapper">
     <div class="header">{{ settings.title }}</div>
     <div class="content">
-      <component :is="settings.component" :values="settings.props"/>
+      <component :is="AddPaymentForm" :item="settings.content"/>
      </div>
     <div class="footer">
       <button class="save-button" @click="onCloseClick">Close</button>
@@ -14,7 +14,8 @@
 export default{
     name: "ModalWindowAddPaymentForm",
     props: {
-      settings: Object
+      settings: Object,
+      id: Number
     },
     components: {
         AddPaymentForm: ()=>import('./AddPaymentForm.vue'),

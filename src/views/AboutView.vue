@@ -20,12 +20,6 @@
       />
     </main>
     <MyButton />
-    <transition name="fade">
-      <ModalWindowAddPaymentForm :settings="settings" v-if="modalShow" />
-    </transition>
-    <transition name="fade">
-      <ContextMenu />
-    </transition>
   </div>
 </template>
 
