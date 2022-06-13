@@ -4,12 +4,9 @@
       <h1 class="title">My Personal Costs</h1>
     </div>
     <div class="button-wrap">
-      <!-- <button class="save-button" type="button" @click="addNewCost">
-        ADD NEW COST +
-      </button> -->
+
       <button class="save-button" @click="openModalForm">Show Form</button>
     </div>
-    <!-- <AddPaymentForm @addNewPayment="addPaymentData" /> -->
     <main>
       <PaymentsDisplay :items="currentElements" />
       <MyPagination

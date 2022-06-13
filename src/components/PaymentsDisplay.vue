@@ -45,12 +45,17 @@ export default {
   methods: {
     ...mapMutations([
       'deleteElementFromPaymentList',
+      'editItemFromPaymentsList'
     ]),
-    editItem(item) {
-      this.$modal.show('addform', {title: "Edit Payment", component: 'AddPaymentForm', props: {item} })
-      console.log('edit',item)
-    },
 
+    editItem(item) {
+      this.editItemFromPaymentsList(item);
+      this.$modal.show('addform', {title: "Edit Payment Details", component: 'AddPaymentForm', props: {
+        item
+      }
+      })
+    },
+  
     actionDelete(id) {
       this.deleteElementFromPaymentList(id);
       this.$contextMenu.close();
@@ -71,7 +76,7 @@ export default {
 }
 </script>
 
-<style scoped>
+<style>
 .cursor {
   cursor: pointer;
 }

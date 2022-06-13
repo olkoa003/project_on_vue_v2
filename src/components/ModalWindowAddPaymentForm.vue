@@ -2,13 +2,14 @@
   <div class="wrapper">
     <div class="header">{{ settings.title }}</div>
     <div class="content">
-      <component :is="settings.component" :values="settings.props"/>
-     </div>
+      <component :is="settings.component" :values="settings.props" />
+    </div>
     <div class="footer">
       <button @click="onCloseClick">Close</button>
     </div>
   </div>
 </template>
+
 <script>
 export default{
     name: "ModalWindowAddPaymentForm",
@@ -17,21 +18,23 @@ export default{
     },
     components: {
         AddPaymentForm: ()=>import('./AddPaymentForm.vue'),
-        AuthForm: ()=>import('./AuthForm.vue')
+        AuthForm: ()=>import('./AuthForm.vue'),
+        EditPayment: ()=> import('./EditPayment.vue')
     },
     methods: {
         onCloseClick() {
             this.$modal.hide();
         }
     },
-}
+  }
 </script>
-<style lang="scss" scoped >
-.wrapper{
-    padding: 20px;
-    position: absolute;
-    top:20%;
-    left: 35%;
-    background: #efefef;
+
+<style>
+.wrapper {
+  padding: 20px;
+  position: absolute;
+  top: 33%;
+  right: 40%;
+  background: #efefef;
 }
 </style>

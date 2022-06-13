@@ -17,14 +17,13 @@ const mutations = {
     paymentList.splice(i, 1);
     state.paymentList = [...paymentList];
   },
-  editItemFromPaymentsList(state, id){
-      const idxArr = state.paymentsList.findIndex((el)=>{
-          return el.id === id
-      })
-      console.log(idxArr)
-  },
   setCategories(state, payload){
     state.categoryList = payload
+  },
+  editPayment(state, payload) {
+    state.paymentsList.splice(
+      state.paymentsList.findIndex(item => item.id === payload.id), 1, payload
+    );
   }
 }
 
@@ -49,7 +48,7 @@ export default new Vuex.Store({
           const items = []
           for(let i=1; i<=50; i++) {
             items.push({
-              date: "23.12.2022",
+              date: "2022-01-19",
               category: "Sport",
               value: i,
               id: Math.floor(Math.random()* Math.floor(Math.random() * Date.now()) +i)
@@ -63,7 +62,7 @@ export default new Vuex.Store({
     fetchCategoryList({commit}) {
       return new Promise((resolve)=> {
         setTimeout(()=>{
-          resolve (['Food', 'Transport', 'Education', 'Entertainment'])
+          resolve (['Food', 'Transport', 'Education', 'Entertainment', 'Sport'])
         },1000)
       }).then(res => { commit('setCategories', res)})
     }

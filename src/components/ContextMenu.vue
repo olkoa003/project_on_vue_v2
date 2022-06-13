@@ -1,6 +1,6 @@
 <template>
   <div class="context" v-if="shown" :style="styles">
-    <div v-for="item in items" :key="item.text" class="context__item" @click="onClick(item)">
+    <div v-for=" item in items" :key="item.text" class="context__item" @click="onClick(item)">
       {{ item.text }}
     </div>
   </div>
@@ -19,14 +19,15 @@ export default {
   computed: {
     styles(){
       return {
-         top: `${this.yPos + 20}px`,
-         left: `${this.xPos + 10}px`
+         top: `${this.yPos + 30}px`,
+         left: `${this.xPos + 20}px`
       }
     }
   },
   methods: {
     onClick(item) {
       item.action()
+      this.$context.close()
     },
     onShow({items, caller}){
       this.items = items
@@ -59,8 +60,11 @@ export default {
   position: absolute;
   background: #eee;
   cursor: pointer;
-  padding: 10px;
+}
+
+.context__item{
+  padding: 5px;
+  font-size: 20px;
   color: black;
-  border: 1px solid;
 }
 </style>

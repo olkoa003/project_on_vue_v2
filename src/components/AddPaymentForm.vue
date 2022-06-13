@@ -10,51 +10,57 @@
       <input
         class="payment-form"
         v-model.number="value"
-        placeholder="Please select an amount"/>
+        placeholder="Please select an amount"
+      />
       <button class="save-button" @click="onClickSave">SAVE</button>
     </div>
   </div>
 </template>
 
-
 <script>
 export default {
   name: "AddPaymentForm",
-  props:{
-    item: Object
+  props: {
+    values: Object
   },
   data() {
     return {
       date: "",
       category: "",
-      value: 0,
-      id: Number
-    };
+      value: ""
+    }
   },
   computed: {
-    getCurrentDate() {
-      const today = new Date();
-      const d = today.getDate();
-      const m = today.getMonth() + 1;
-      const y = today.getFullYear();
-      return `${d}.${m}.${y}`;
+    getCurrentDate(){
+      const today = new Date()
+      const d = today.getDate()
+      const m = today.getMonth()+1
+      const y = today.getFullYear()
+      return `${d}.${m}.${y}`
     },
-    categoryList() {
-      return this.$store.getters.getCategoryList;
-    },
+    categoryList(){
+      return this.$store.getters.getCategoryList
+    }
   },
   methods: {
-    onClickSave() {
+    onClickSave(){
       const data = {
         date: this.date || this.getCurrentDate,
         category: this.category,
-        value: this.valuee
+        value: this.value
       };
-      this.$store.commit("addDataToPaymentsList", data);
-    },
+      if (this.action === 'Add') {
+          this.addNewPayment(data);
+        } else if (this.action === 'Edit') {
+          data.id = this.idEdit;
+          this.setEditItem(data);
+        }
+      this.$store.commit('addDataToPaymentsList', data)
+      // console.log(data);
+    }
   },
   async created() {
-    await this.$store.dispatch("fetchCategoryList");
+    await this.$store.dispatch('fetchCategoryList')
   },
   mounted() {
     if(this.values?.item) {
@@ -86,14 +92,12 @@ export default {
   display: flex;
   flex-direction: column;
   width: 300px;
-  margin-left: 10px;
-}
 
+}
 .payment-form {
   margin-top: 10px;
   padding: 20px;
 }
-
 .save-button {
   padding: 10px;
   font-size: 20px;
@@ -103,7 +107,6 @@ export default {
   margin-top: 10px;
   margin-bottom: 10px;
 }
-
 .hidden {
   display: none;
 }
