@@ -18,8 +18,7 @@ export default{
     },
     components: {
         AddPaymentForm: ()=>import('./AddPaymentForm.vue'),
-        AuthForm: ()=>import('./AuthForm.vue'),
-        EditPayment: ()=> import('./EditPayment.vue')
+        AuthForm: ()=>import('./AuthForm.vue')
     },
     methods: {
         onCloseClick() {

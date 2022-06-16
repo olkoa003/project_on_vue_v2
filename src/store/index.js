@@ -11,20 +11,23 @@ const mutations = {
   addDataToPaymentsList(state, payload) {
     state.paymentList.push(payload)
   },
+
+  editItemFromPaymentsList(state, id) {
+    const idxArr = state.paymentsList.findIndex((el) => {
+      return el.id === id
+    })
+    console.log(idxArr)
+  },
+
   deleteElementFromPaymentList(state, payload) {
     const paymentList = [...state.paymentList];
     const i = paymentList.map(item => item.id).indexOf(payload);
     paymentList.splice(i, 1);
     state.paymentList = [...paymentList];
   },
-  setCategories(state, payload){
+  setCategories(state, payload) {
     state.categoryList = payload
   },
-  editPayment(state, payload) {
-    state.paymentsList.splice(
-      state.paymentsList.findIndex(item => item.id === payload.id), 1, payload
-    );
-  }
 }
 
 const getters = {
@@ -32,7 +35,7 @@ const getters = {
   getFullPaymentValue: state => {
     return state.paymentList.reduce((res, cur) => res + cur.value, 0)
   },
-  getCategoryList: state=>state.categoryList
+  getCategoryList: state => state.categoryList
 }
 
 export default new Vuex.Store({
@@ -42,29 +45,29 @@ export default new Vuex.Store({
   },
   mutations,
   actions: {
-    fetchData({commit}) {
-      return new Promise((resolve)=>{
-        setTimeout(()=>{
+    fetchData({ commit }) {
+      return new Promise((resolve) => {
+        setTimeout(() => {
           const items = []
-          for(let i=1; i<=50; i++) {
+          for (let i = 1; i <= 50; i++) {
             items.push({
               date: "2022-01-19",
               category: "Sport",
               value: i,
-              id: Math.floor(Math.random()* Math.floor(Math.random() * Date.now()) +i)
+              id: Math.floor(Math.random() * Math.floor(Math.random() * Date.now()) + i)
             })
           } resolve(items)
-        },2000)
-      }).then(res=> {
+        }, 2000)
+      }).then(res => {
         commit('setPaymentsListData', res)
       })
     },
-    fetchCategoryList({commit}) {
-      return new Promise((resolve)=> {
-        setTimeout(()=>{
-          resolve (['Food', 'Transport', 'Education', 'Entertainment', 'Sport'])
-        },1000)
-      }).then(res => { commit('setCategories', res)})
+    fetchCategoryList({ commit }) {
+      return new Promise((resolve) => {
+        setTimeout(() => {
+          resolve(['Food', 'Transport', 'Education', 'Entertainment', 'Sport'])
+        }, 1000)
+      }).then(res => { commit('setCategories', res) })
     }
   },
   getters

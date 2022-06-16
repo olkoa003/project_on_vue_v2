@@ -46,8 +46,7 @@ export default {
   data() {
     return {
       modalShow: false,
-      settings: {
-      },
+      settings: {},
     };
   },
   methods: {

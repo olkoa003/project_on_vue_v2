@@ -49,13 +49,11 @@ export default {
     ]),
 
     editItem(item) {
-      this.editItemFromPaymentsList(item);
-      this.$modal.show('addform', {title: "Edit Payment Details", component: 'AddPaymentForm', props: {
+      this.$modal.show('addform', {title: "Edit Payment Details", component: 'AddPaymentForm', action: "Edit",  idEdit: item.id, props: {
         item
-      }
-      })
+      }})
     },
-  
+    
     actionDelete(id) {
       this.deleteElementFromPaymentList(id);
       this.$contextMenu.close();

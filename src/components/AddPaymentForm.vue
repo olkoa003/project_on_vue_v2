@@ -49,12 +49,6 @@ export default {
         category: this.category,
         value: this.value
       };
-      if (this.action === 'Add') {
-          this.addNewPayment(data);
-        } else if (this.action === 'Edit') {
-          data.id = this.idEdit;
-          this.setEditItem(data);
-        }
       this.$store.commit('addDataToPaymentsList', data)
       // console.log(data);
     }
@@ -85,14 +79,11 @@ export default {
   },
 }
 </script>
-
-
 <style>
 .main-form {
   display: flex;
   flex-direction: column;
   width: 300px;
-
 }
 .payment-form {
   margin-top: 10px;
