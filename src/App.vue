@@ -41,7 +41,7 @@
 </template>
 
 <script>
-import ContextMenu from './components/ContextMenu.vue';
+import ContextMenu from "./components/ContextMenu.vue";
 export default {
   data() {
     return {
@@ -55,25 +55,29 @@ export default {
         name: "Dashboard",
       });
     },
-    onShow(data){
-      this.modalShow = true
-      this.settings = data
-      console.log(data)
+    onShow(data) {
+      this.modalShow = true;
+      this.settings = data;
+      console.log(data);
     },
-    onHide(){
-      this.settings = {}
-      this.modalShow = false
-    }
+    onHide() {
+      this.settings = {};
+      this.modalShow = false;
+    },
   },
   mounted() {
-    this.$modal.EventBus.$on('show', this.onShow)
-    this.$modal.EventBus.$on('hide', this.onHide)
+    this.$modal.EventBus.$on("show", this.onShow);
+    this.$modal.EventBus.$on("hide", this.onHide);
   },
   beforeDestroy() {
-    this.$modal.EventBus.$off('show', this.onShow)
-    this.$modal.EventBus.$off('hide', this.onHide)
+    this.$modal.EventBus.$off("show", this.onShow);
+    this.$modal.EventBus.$off("hide", this.onHide);
   },
-  components: { ModalWindowAddPaymentForm: () => import("./components/ModalWindowAddPaymentForm.vue"), ContextMenu },
+  components: {
+    ModalWindowAddPaymentForm: () =>
+      import("./components/ModalWindowAddPaymentForm.vue"),
+    ContextMenu,
+  },
 };
 </script>
 
@@ -114,8 +118,8 @@ nav {
   transition: opacity 0.5s;
 }
 
-.fade-enter, .fade-leave-to{
+.fade-enter,
+.fade-leave-to {
   opacity: 0;
 }
-
 </style>

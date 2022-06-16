@@ -14,11 +14,13 @@
         </thead>
         <tbody>
           <tr v-for="(item, idx) in items" :key="idx">
-            <td>{{ item.id }} </td>
+            <td>{{ item.id }}</td>
             <td>{{ item.date }}</td>
             <td>{{ item.category }}</td>
             <td>{{ item.value }}</td>
-            <td class="cursor" @click="onContextMenuClick($event,item)">...</td>
+            <td class="cursor" @click="onContextMenuClick($event, item)">
+              ...
+            </td>
           </tr>
         </tbody>
       </table>
@@ -43,38 +45,44 @@ export default {
     },
   },
   methods: {
-    ...mapMutations([
-      'deleteElementFromPaymentList',
-      'editItemFromPaymentsList'
-    ]),
+    ...mapMutations(["deleteElementFromPaymentList", "editDataToPaymentList"]),
 
     editItem(item) {
-      this.$modal.show('addform', {title: "Edit Payment Details", component: 'AddPaymentForm', action: "Edit",  idEdit: item.id, props: {
-        item
-      }})
+      this.$modal.show("addform", {
+        title: "Edit Payment Details",
+        component: "AddPaymentForm",
+        props: {
+          item,
+        },
+      });
     },
-    
+
     actionDelete(id) {
       this.deleteElementFromPaymentList(id);
-      this.$contextMenu.close();
     },
 
-    onContextMenuClick(event, item){
+    onContextMenuClick(event, item) {
       const items = [
-          {
-            text: "Edit", action: ()=> { this.editItem(item)}
+        {
+          text: "Edit",
+          action: () => {
+            this.editItem(item);
           },
-          {
-            text: 'Delete item', action: ()=>{ this.actionDelete(item.id)}
-          }
-        ]
-      this.$contextMenu.show({event,items})
-    }
-  }
-}
+        },
+        {
+          text: "Delete item",
+          action: () => {
+            this.actionDelete(item.id);
+          },
+        },
+      ];
+      this.$contextMenu.show({ event, items });
+    },
+  },
+};
 </script>
 
-<style>
+<style lang="scss" scoped>
 .cursor {
   cursor: pointer;
 }

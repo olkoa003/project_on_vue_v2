@@ -8,15 +8,19 @@ const mutations = {
   setPaymentsListData(state, payload) {
     state.paymentList = payload
   },
+
   addDataToPaymentsList(state, payload) {
     state.paymentList.push(payload)
   },
 
-  editItemFromPaymentsList(state, id) {
-    const idxArr = state.paymentsList.findIndex((el) => {
-      return el.id === id
+  editDataToPaymentList(state, payload) {
+    state.paymentList.forEach((el) => {
+      if (el.id === payload.id) {
+        el.value = payload.value
+        el.category = payload.category
+        el.date = payload.date
+      }
     })
-    console.log(idxArr)
   },
 
   deleteElementFromPaymentList(state, payload) {

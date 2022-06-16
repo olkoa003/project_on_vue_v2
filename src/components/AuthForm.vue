@@ -3,6 +3,6 @@
 </template>
 <script>
 export default {
-  name: 'AuthForm'
-}
+  name: "AuthForm",
+};
 </script>

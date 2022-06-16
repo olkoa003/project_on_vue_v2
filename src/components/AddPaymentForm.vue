@@ -12,7 +12,13 @@
         v-model.number="value"
         placeholder="Please select an amount"
       />
-      <button class="save-button" @click="onClickSave">SAVE</button>
+      <button
+        class="save-button"
+        @click.prevent="onClickSave"
+        @click="onCloseClick"
+      >
+        SAVE
+      </button>
     </div>
   </div>
 </template>
@@ -21,65 +27,80 @@
 export default {
   name: "AddPaymentForm",
   props: {
-    values: Object
+    values: Object,
   },
   data() {
     return {
+      editMode: false,
       date: "",
       category: "",
-      value: ""
-    }
+      value: "",
+    };
   },
   computed: {
-    getCurrentDate(){
-      const today = new Date()
-      const d = today.getDate()
-      const m = today.getMonth()+1
-      const y = today.getFullYear()
-      return `${d}.${m}.${y}`
+    getCurrentDate() {
+      const today = new Date();
+      const d = today.getDate();
+      const m = today.getMonth() + 1;
+      const y = today.getFullYear();
+      return `${d}.${m}.${y}`;
     },
-    categoryList(){
-      return this.$store.getters.getCategoryList
-    }
+    categoryList() {
+      return this.$store.getters.getCategoryList;
+    },
   },
   methods: {
-    onClickSave(){
+    onClickSave() {
       const data = {
         date: this.date || this.getCurrentDate,
         category: this.category,
-        value: this.value
+        value: +this.value,
+        id:
+          this.id ||
+          Math.floor(Math.random() * Math.floor(Math.random() * Date.now())),
       };
-      this.$store.commit('addDataToPaymentsList', data)
-      // console.log(data);
-    }
+      if (this.editMode) {
+        this.$store.commit("editDataToPaymentList", data);
+        this.editMode = false;
+      } else {
+        this.$store.commit("addDataToPaymentsList", data);
+      }
+      this.date = "";
+      this.category = "";
+      this.value = "";
+    },
+    onCloseClick() {
+      this.$modal.hide();
+    },
   },
+
   async created() {
-    await this.$store.dispatch('fetchCategoryList')
+    await this.$store.dispatch("fetchCategoryList");
   },
   mounted() {
-    if(this.values?.item) {
-      
-      const {category, date, value} = this.values.item
-      this.value = value
-      this.date = date
-      this.category = category
-      return 
+    if (this.values?.item) {
+      const { category, date, value, id } = this.values.item;
+      this.value = value;
+      this.date = date;
+      this.category = category;
+      this.id = id;
+      this.editMode = true;
+      return;
     }
-    const {category, section} = this.$route.params
-    if(!category || !section) {
-      return 
-    }
-    this.category = category
-    const {value} = this.$route.query
-    if(!value) return 
-    this.value = value
-    if(this.value && this.category) {
-       this.onClickSave()
+    const { category, section } = this.$route.params;
+    if (!category || !section) return;
+    this.category = category;
+    const { value } = this.$route.query;
+    if (!value) return;
+    this.value = value;
+    if (this.value && this.category) {
+      this.onClickSave();
     }
   },
-}
+};
 </script>
-<style>
+
+<style lang="scss">
 .main-form {
   display: flex;
   flex-direction: column;

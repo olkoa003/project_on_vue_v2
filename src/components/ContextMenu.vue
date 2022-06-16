@@ -1,6 +1,11 @@
 <template>
   <div class="context" v-if="shown" :style="styles">
-    <div v-for=" item in items" :key="item.text" class="context__item" @click="onClick(item)">
+    <div
+      v-for="item in items"
+      :key="item.text"
+      class="context__item"
+      @click="onClick(item)"
+    >
       {{ item.text }}
     </div>
   </div>
@@ -13,46 +18,45 @@ export default {
       shown: false,
       items: [],
       xPos: 0,
-      yPos: 0
-    }
+      yPos: 0,
+    };
   },
   computed: {
-    styles(){
+    styles() {
       return {
-         top: `${this.yPos + 30}px`,
-         left: `${this.xPos + 20}px`
-      }
-    }
+        top: `${this.yPos + 30}px`,
+        left: `${this.xPos + 20}px`,
+      };
+    },
   },
   methods: {
     onClick(item) {
-      item.action()
-      this.$context.close()
+      item.action();
     },
-    onShow({items, caller}){
-      this.items = items
-      this.shown = true
-      this.setPostion(caller)
+    onShow({ items, caller }) {
+      this.items = items;
+      this.shown = true;
+      this.setPostion(caller);
     },
-    onHide(){
-      this.shown = false
-      this.items = []
+    onHide() {
+      this.shown = false;
+      this.items = [];
     },
-    setPostion(caller){
-      const pos= caller.getBoundingClientRect()
-      this.xPos = pos.left
-      this.yPos = pos.top
-    }
+    setPostion(caller) {
+      const pos = caller.getBoundingClientRect();
+      this.xPos = pos.left;
+      this.yPos = pos.top;
+    },
   },
   mounted() {
-    this.$contextMenu.EventBus.$on('show', this.onShow)
-    this.$contextMenu.EventBus.$on('hide', this.onHide)
+    this.$contextMenu.EventBus.$on("show", this.onShow);
+    this.$contextMenu.EventBus.$on("hide", this.onHide);
   },
   beforeDestroy() {
-    this.$contextMenu.EventBus.$off('show', this.onShow)
-    this.$contextMenu.EventBus.$off('hide', this.onHide)
+    this.$contextMenu.EventBus.$off("show", this.onShow);
+    this.$contextMenu.EventBus.$off("hide", this.onHide);
   },
-}
+};
 </script>
 
 <style lang="scss" scoped>
@@ -62,7 +66,7 @@ export default {
   cursor: pointer;
 }
 
-.context__item{
+.context__item {
   padding: 5px;
   font-size: 20px;
   color: black;

@@ -4,7 +4,6 @@
       <h1 class="title">My Personal Costs</h1>
     </div>
     <div class="button-wrap">
-
       <button class="save-button" @click="openModalForm">Show Form</button>
     </div>
     <main>
@@ -16,21 +15,18 @@
         @changePage="changePage"
       />
     </main>
-    <MyButton />
   </div>
 </template>
 
 <script>
 import { mapMutations, mapGetters } from "vuex";
 import PaymentsDisplay from "@/components/PaymentsDisplay.vue";
-import MyButton from "@/components/MyButton.vue";
 import MyPagination from "@/components/MyPagination.vue";
 
 export default {
   name: "HomeView",
   components: {
     PaymentsDisplay,
-    MyButton,
     MyPagination,
   },
   data() {
@@ -62,9 +58,12 @@ export default {
     addPaymentData(data) {
       this.paymentsList.push(data);
     },
-    openModalForm(){
-      this.$modal.show('addform', {title: "Add New Payment", component: 'AddPaymentForm'});
-    }
+    openModalForm() {
+      this.$modal.show("addform", {
+        title: "Add New Payment",
+        component: "AddPaymentForm",
+      });
+    },
   },
   created() {
     // this.paymentsList = this.fetchData();
@@ -74,8 +73,8 @@ export default {
   mounted() {
     if (!this.$route.params?.page || isNaN(this.$route.params.page)) return;
     this.cur = Number(this.$route.params.page);
-  }
-}
+  },
+};
 </script>
 
 <style>
@@ -103,5 +102,4 @@ export default {
   display: flex;
   color: red;
 }
-
 </style>
