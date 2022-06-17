@@ -36,7 +36,7 @@ export default {
 };
 </script>
 
-<style lang="scss" scoped>
+<style module lang="scss" scoped>
 .wrp {
   display: flex;
   justify-content: flex-start;
