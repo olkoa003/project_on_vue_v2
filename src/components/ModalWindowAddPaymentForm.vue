@@ -28,7 +28,7 @@ export default{
   }
 </script>
 
-<style lang="scss" scoped>
+<style lang="scss">
 .wrapper {
   padding: 20px;
   position: absolute;

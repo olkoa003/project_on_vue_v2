@@ -1,13 +1,11 @@
 <template>
   <div :class="[$style.wrp]">
-    <div @click="onClick(cur - 1)">-</div>
-    <div
-      v-for="i in amount"
-      :key="i"
-      :class="{ [$style.active]: cur === i }"
-      @click="onClick(i)"
-    >
-      {{ i }}
+    <div @click="onClick(cur - 1)"> - </div>
+    <div v-for="i in amount"
+    :key="i"
+    :class="{[$style.active]: cur === i}"
+    @click="onClick(i)"
+    >{{ i }}
     </div>
     <div @click="onClick(cur + 1)">+</div>
   </div>
@@ -22,21 +20,21 @@ export default {
   },
   computed: {
     amount() {
-      return Math.ceil(this.length / this.n);
-    },
+      return Math.ceil(this.length / this.n)
+    }
   },
   methods: {
     onClick(p) {
-      if (p < 1 || p > this.amount) {
-        return;
+      if(p<1 || p> this.amount) {
+        return
       }
-      this.$emit("changePage", p);
-    },
+      this.$emit('changePage', p)
+    }
   },
-};
+}
 </script>
 
-<style lang="scss" scoped>
+<style module lang="scss">
 .wrp {
   display: flex;
   justify-content: flex-start;
@@ -44,7 +42,7 @@ export default {
   & > div {
     padding: 10px;
     &.active {
-      background-color: #4caf50;
+      background-color: #4CAF50;
       color: white;
     }
   }

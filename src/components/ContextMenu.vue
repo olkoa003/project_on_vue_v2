@@ -25,7 +25,7 @@ export default {
     styles() {
       return {
         top: `${this.yPos + 30}px`,
-        left: `${this.xPos + 20}px`,
+        left:`${this.xPos + 20}px`,
       };
     },
   },
@@ -59,7 +59,7 @@ export default {
 };
 </script>
 
-<style lang="scss" scoped>
+<style lang="scss">
 .context {
   position: absolute;
   background: #eee;
