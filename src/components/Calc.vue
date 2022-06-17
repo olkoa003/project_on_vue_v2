@@ -3,8 +3,8 @@
     <h1>My Calculator</h1>
     <hr />
     <div class="display">
-      <input v-model.number.trim="operand1" />
-      <input v-model.number.trim="operand2" />
+      <input v-model.number.trim="operand1" name="operand1" />
+      <input v-model.number.trim="operand2" name="operand2" />
       = {{ result }}
     </div>
     <hr />
@@ -20,12 +20,12 @@
     </div>
 
     <div class="keyboard">
-      <button @click="calculate('+')">+</button>
-      <button @click="calculate('-')">-</button>
-      <button @click="calculate('/')">/</button>
-      <button @click="calculate('*')">*</button>
-      <button @click="calculate('exponent')">Exp.</button>
-      <button @click="calculate('trunc')">trunc</button>
+      <button @click="calculate('+')" name="+">+</button>
+      <button @click="calculate('-')" name="-">-</button>
+      <button @click="calculate('/')" name="/">/</button>
+      <button @click="calculate('*')" name="*">*</button>
+      <button @click="calculate('exponent')" name="Exp.">Exp.</button>
+      <button @click="calculate('trunc')" name="trunc">trunc</button>
     </div>
 
     <div class="form-check">
@@ -59,7 +59,7 @@
 
 <script>
 export default {
-  name: "HelloWorld",
+  name: "Calc",
   prop: {
     result: {
       type: Number,
@@ -70,9 +70,9 @@ export default {
   },
   data() {
     return {
-      result: 0,
       operand1: "",
       operand2: "",
+      result: 0,
       error: "",
       operands: ["+", "-", "/", "*", "exponent", "trunc"],
       numbers: [0, 1, 2, 3, 4, 5, 6, 7, 8, 9],
