@@ -7,8 +7,8 @@ Vue.use(Router)
 const routes = [
   {
     path: '/',
-    name: "Home",
-    component: ()=> import('../views/HomeView.vue')
+    name: "Calculator",
+    component: ()=> import('../views/CalculatorView.vue')
   },
   {
     path: "/about",

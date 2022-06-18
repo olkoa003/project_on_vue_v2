@@ -59,7 +59,7 @@
 
 <script>
 export default {
-  name: "HelloWorld",
+  name: "CalulatorComponent",
   prop: {
     result: {
       type: Number,
