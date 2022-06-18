@@ -1,4 +1,4 @@
-## Calculator || Personal Costs app
+## Calculator || The App to manage personal costs
 
 ## Project setup
 ```

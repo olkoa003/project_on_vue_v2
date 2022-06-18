@@ -38,7 +38,8 @@
         type="button"
         v-for="number in numbers"
         :key="number"
-        @click="append(number)">
+        @click="append(number)"
+      >
         {{ number }}
       </button>
       <button @click="reset">Delete</button>
