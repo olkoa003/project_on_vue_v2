@@ -1,27 +1,39 @@
 <template>
-  <div class="home">
-    <div>
-      <h1 class="title">My Personal Costs</h1>
-    </div>
-    <div class="button-wrap">
-      <button class="save-button" @click="openModalForm">Show Form</button>
-    </div>
-    <main>
-      <PaymentsDisplay :items="currentElements" />
-      <MyPagination
-        :cur="cur"
-        :length="getPaymentsList.length"
-        :n="n"
-        @changePage="changePage"
-      />
-    </main>
-  </div>
+  <v-container>
+    <v-row>
+      <v-col>
+        <header>
+          <div class="text-h5 text-sm-h3 mb-8">My Personal Costs</div>
+        </header>
+        <v-btn color="teal" dark @click="openModalForm"
+          >ADD NEW COST <v-icon>mdi-plus</v-icon></v-btn
+        >
+
+        <v-card>
+          <AddPaymentForm />
+        </v-card>
+
+        <PaymentsDisplay :items="currentElements" />
+        <MyPagination
+          :cur="cur"
+          :length="getPaymentsList.length"
+          :n="n"
+          @changePage="changePage"
+        />
+      </v-col>
+        <v-col>
+          <div class="text-h5 text-sm-h3 mb-8">Diagram</div>
+          <MyDiagram :items="paymentsList" />
+        </v-col>
+    </v-row>
+  </v-container>
 </template>
 
 <script>
 import { mapMutations, mapGetters } from "vuex";
 import PaymentsDisplay from "@/components/PaymentsDisplay.vue";
 import MyPagination from "@/components/MyPagination.vue";
+
 
 export default {
   name: "HomeView",
@@ -34,6 +46,7 @@ export default {
       paymentsList: [],
       cur: 1,
       n: 10,
+      dialog: false,
     };
   },
   computed: {
