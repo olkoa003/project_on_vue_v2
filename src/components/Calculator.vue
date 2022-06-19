@@ -1,10 +1,12 @@
 <template>
   <div class="main">
-    <h1>My Calculator</h1>
+    <header>
+      <div class="text-h1 text-sm-h3 mb-8 mt-8">My Calculator</div>
+    </header>
     <hr />
     <div class="display">
-      <input v-model.number.trim="operand1" />
-      <input v-model.number.trim="operand2" />
+      <input class="inputcal" v-model.number.trim="operand1" />
+      <input class="inputcal" v-model.number.trim="operand2" />
       = {{ result }}
     </div>
     <hr />
@@ -14,34 +16,39 @@
     </div>
 
     <div class="mesages">
-      <template v-if="result < 0">Получилось отрицательное число</template>
-      <template v-else-if="result < 100">Результат в первой сотне</template>
-      <template v-else>Получилось слишком большое число</template>
+      <template v-if="result < 0">You got a negative number</template>
+      <template v-else-if="result < 100">Result in the first hundred</template>
+      <template v-else>You got too big number</template>
     </div>
 
     <div class="keyboard">
-      <button @click="calculate('+')">+</button>
-      <button @click="calculate('-')">-</button>
-      <button @click="calculate('/')">/</button>
-      <button @click="calculate('*')">*</button>
-      <button @click="calculate('exponent')">Exp.</button>
-      <button @click="calculate('trunc')">trunc</button>
+      <v-btn class="keyboard" @click="calculate('+')">+</v-btn>
+      <v-btn class="keyboard" @click="calculate('-')">-</v-btn>
+      <v-btn class="keyboard" @click="calculate('/')">/</v-btn>
+      <v-btn class="keyboard" @click="calculate('*')">*</v-btn>
+      <v-btn class="keyboard" @click="calculate('exponent')">Exp.</v-btn>
+      <v-btn class="keyboard" @click="calculate('trunc')">trunc</v-btn>
     </div>
 
     <div class="form-check">
-      <input type="checkbox" id="checkbox" v-model="checked" />
-      <label>Отобразить экранную клавиатуру</label>
+      <v-checkbox
+        type="checkbox"
+        id="checkbox"
+        v-model="checked"
+        label="Display keyboard"
+      />
     </div>
 
-    <div class="mainKeyboard" v-show="checked">
-      <button
+    <div class="mainKeyboard keyboard" v-show="checked">
+      <v-btn
         type="button"
         v-for="number in numbers"
         :key="number"
-        @click="append(number)">
+        @click="append(number)"
+      >
         {{ number }}
-      </button>
-      <button @click="reset">Delete</button>
+      </v-btn>
+      <v-btn @click="reset">Delete</v-btn>
     </div>
 
     <div class="optionlist">
@@ -51,20 +58,20 @@
       <label for="operand2">Operand2</label>
       <input type="radio" id="two" value="operand2" v-model="picked" />
       <br />
-      <span>Выбрано: {{ picked }}</span>
+      <span>Chosen: {{ picked }}</span>
     </div>
   </div>
 </template>
 
 <script>
 export default {
-  name: "HelloWorld",
+  name: "CalulatorComponent",
   prop: {
     result: {
-      type: Number,
+      type: Number
     },
     number: {
-      type: Number,
+      type: Number
     },
   },
   data() {
@@ -188,6 +195,20 @@ h1 {
 }
 
 .form-check {
+  display: flex;
+  justify-content: center;
   margin-top: 20px;
+}
+
+.inputcal {
+  border: 1px solid;
+  color: black;
+  margin-right: 3px;
+}
+
+.keyboard {
+  display: flex;
+  gap: 5px;
+  justify-content: center;
 }
 </style>
