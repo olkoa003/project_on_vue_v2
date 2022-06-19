@@ -1,6 +1,6 @@
 <template>
   <v-container>
-    <div class="total mb-5">Total Amount Spent: {{ getFPV }}</div>
+    <h2 class="mb-5 pt-2 pb-2">Total Amount Spent: {{ getFPV }}</h2>
     <v-row class="elevation-1">
       <v-col :cols="3" class="font-weight-bold">#</v-col>
       <v-col :cols="3" class="font-weight-bold">Date</v-col>
@@ -13,18 +13,52 @@
       <v-col :cols="3">{{ item.date }}</v-col>
       <v-col :cols="2">{{ item.category }}</v-col>
       <v-col :cols="2">{{ item.value }}</v-col>
-      <v-col :cols="2" @click="onContextMenuClick($event, item)">...</v-col>
+      <v-col :cols="2">
+        <v-menu :offset-x="true">
+          <template v-slot:activator="{ on }">
+            <v-btn icon v-on="on">
+              <v-icon>mdi-dots-vertical</v-icon>
+            </v-btn>
+          </template>
+
+          <v-list>
+            <v-dialog v-model="dialogMenu" width="500">
+              <template v-slot:activator="{ on }">
+                <v-list-item v-on="on">
+                  <v-icon>mdi-pencil</v-icon>
+                  &nbsp;Edit Item
+                </v-list-item>
+              </template>
+              <AddPaymentForm
+                v-if="dialogMenu"
+                :values="{ item }"
+                @closeMenu="closeMenu"
+              />
+            </v-dialog>
+
+            <v-list-item @click="actionDelete(id)"
+              ><v-icon>mdi-delete</v-icon>&nbsp;Delete Item</v-list-item
+            >
+          </v-list>
+        </v-menu>
+      </v-col>
     </v-row>
   </v-container>
 </template>
 
 <script>
 import { mapMutations } from "vuex";
+import AddPaymentForm from "@/components/AddPaymentForm.vue";
 
 export default {
   name: "PaymentsDisplay",
+  components: {
+    AddPaymentForm,
+  },
   data() {
     return {
+      dialogMenu: false,
+      title: "Edit"
     };
   },
   props: {

@@ -48,22 +48,27 @@ export default new Vuex.Store({
     categoryList: []
   },
   mutations,
+
   actions: {
     fetchData({ commit }) {
       return new Promise((resolve) => {
         setTimeout(() => {
           const items = []
           for (let i = 1; i <= 50; i++) {
+            const catArr = ['Food', 'Transport', 'Education', 'Entertainment', 'Sport']
+            const rand = Math.floor(Math.random() * catArr.length)
             items.push({
-              date: "2022-01-19",
-              category: "Sport",
+              date: '25.05.2022',
+              category: catArr[rand],
               value: i,
               id: Math.floor(Math.random() * Math.floor(Math.random() * Date.now()) + i)
             })
           } resolve(items)
         }, 2000)
       }).then(res => {
-        commit('setPaymentsListData', res)
+        if (!this.state.paymentList.length) {
+          commit('setPaymentsListData', res)
+        }
       })
     },
     fetchCategoryList({ commit }) {
@@ -76,3 +81,6 @@ export default new Vuex.Store({
   },
   getters
 })
+
+
+

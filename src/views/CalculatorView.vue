@@ -11,7 +11,7 @@ import Calculator from "@/components/Calculator.vue";
 export default {
   name: "CalculatorView",
   components: {
-    Calculator
+    Calculator,
   },
   data() {
     return {

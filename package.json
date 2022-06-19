@@ -9,10 +9,9 @@
   },
   "dependencies": {
     "@syncfusion/ej2-vue-charts": "^20.1.59",
-    "chart.js": "^2.9.4",
     "core-js": "^3.8.3",
-    "highcharts-vue": "^1.4.0",
     "vue": "^2.6.14",
+    "vue-chartjs": "^4.1.1",
     "vue-router": "^3.5.1",
     "vuetify": "^2.6.0",
     "vuex": "^3.6.2"
@@ -20,6 +19,7 @@
   "devDependencies": {
     "@babel/core": "^7.12.16",
     "@babel/eslint-parser": "^7.12.16",
+    "@types/chart.js": "^2.9.37",
     "@vue/cli-plugin-babel": "~5.0.0",
     "@vue/cli-plugin-eslint": "~5.0.0",
     "@vue/cli-plugin-router": "~5.0.0",

@@ -1,31 +1,31 @@
 <template>
   <div class="wrapper">
-    <div class="header">{{ settings.title }}</div>
+    <h3 class="header 3rem pb-3">{{ settings.title }}</h3>
     <div class="content">
       <component :is="settings.component" :values="settings.props" />
     </div>
     <div class="footer">
-      <button @click="onCloseClick">Close</button>
+      <v-btn class="mt-5" @click="onCloseClick">Close</v-btn>
     </div>
   </div>
 </template>
 
 <script>
-export default{
-    name: "ModalWindowAddPaymentForm",
-    props: {
-      settings: Object
+export default {
+  name: "ModalWindowAddPaymentForm",
+  props: {
+    settings: Object
+  },
+  components: {
+    AddPaymentForm: () => import("./AddPaymentForm.vue"),
+    AuthForm: () => import("./AuthForm.vue"),
+  },
+  methods: {
+    onCloseClick() {
+      this.$modal.hide();
     },
-    components: {
-        AddPaymentForm: ()=>import('./AddPaymentForm.vue'),
-        AuthForm: ()=>import('./AuthForm.vue')
-    },
-    methods: {
-        onCloseClick() {
-            this.$modal.hide();
-        }
-    },
-  }
+  },
+};
 </script>
 
 <style lang="scss">
@@ -35,5 +35,7 @@ export default{
   top: 33%;
   right: 40%;
   background: #efefef;
+  width: 400px;
+  z-index: 1;
 }
 </style>

@@ -1,33 +1,19 @@
 <template>
-  <div>
-    <div class="main-form">
-      <input type="date" class="payment-form" v-model="date" />
-      <select class="payment-form" v-model="category" v-if="categoryList">
-        <option v-for="(value, idx) in categoryList" :key="idx">
-          {{ value }}
-        </option>
-      </select>
-      <input
-        class="payment-form"
-        v-model.number="value"
-        placeholder="Please select an amount"
-      />
-      <button
-        class="save-button"
-        @click.prevent="onClickSave"
-        @click="onCloseClick"
-      >
-        SAVE
-      </button>
-    </div>
-  </div>
+  <v-card class="pa-8">
+    <v-text-field :rules="[() => !!date || 'This field is required']" v-model="date" type="date" label="Date" />
+    <v-select v-model="category" :items="categoryList" :rules="[() => !!category || 'This field is required']"  label="Categories" />
+    <v-text-field v-model="value"  :rules="[() => !!value || 'This field is required']"  label="Value" />
+    <v-btn color="teal" dark @click.prevent="onClickSave" @click="onCloseClick">
+      SAVE
+    </v-btn>
+  </v-card>
 </template>
 
 <script>
 export default {
   name: "AddPaymentForm",
   props: {
-    values: Object,
+    values: Object
   },
   data() {
     return {

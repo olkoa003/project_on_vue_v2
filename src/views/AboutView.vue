@@ -3,15 +3,11 @@
     <v-row>
       <v-col>
         <header>
-          <div class="text-h5 text-sm-h3 mb-8">My Personal Costs</div>
+          <div class="text-h5 text-sm-h3 mb-8 mt-8">My Personal Costs</div>
         </header>
         <v-btn color="teal" dark @click="openModalForm"
           >ADD NEW COST <v-icon>mdi-plus</v-icon></v-btn
         >
-
-        <v-card>
-          <AddPaymentForm />
-        </v-card>
 
         <PaymentsDisplay :items="currentElements" />
         <MyPagination
@@ -21,10 +17,10 @@
           @changePage="changePage"
         />
       </v-col>
-        <v-col>
-          <div class="text-h5 text-sm-h3 mb-8">Diagram</div>
-          <MyDiagram :items="paymentsList" />
-        </v-col>
+      <v-col>
+        <div class="text-h5 text-sm-h3 mb-8 mt-8">Diagram</div>
+        <MyChart class="mt-16 ml-16"/>
+      </v-col>
     </v-row>
   </v-container>
 </template>
@@ -33,13 +29,14 @@
 import { mapMutations, mapGetters } from "vuex";
 import PaymentsDisplay from "@/components/PaymentsDisplay.vue";
 import MyPagination from "@/components/MyPagination.vue";
-
+import MyChart from "../components/MyChart.vue";
 
 export default {
   name: "HomeView",
   components: {
     PaymentsDisplay,
     MyPagination,
+    MyChart,
   },
   data() {
     return {
@@ -47,6 +44,7 @@ export default {
       cur: 1,
       n: 10,
       dialog: false,
+      dialogMenu: false,
     };
   },
   computed: {

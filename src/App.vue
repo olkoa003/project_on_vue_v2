@@ -1,8 +1,12 @@
 <template>
   <v-app>
     <v-app-bar app flat color="primary white--text">
-      <v-btn plain :ripple="false" white to="/">My Calculator</v-btn>
-      <v-btn plain :ripple="false" to="/about">My Personal Costs</v-btn>
+      <v-btn plain :ripple="false" white to="/" color="white" class="pl-16"
+        >My Calculator</v-btn
+      >
+      <v-btn plain :ripple="false" to="/about" color="white" class="pl-16"
+        >My Personal Costs</v-btn
+      >
     </v-app-bar>
     <v-main>
       <transition name="fade">
